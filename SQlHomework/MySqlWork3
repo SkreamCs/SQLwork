@@ -1,0 +1,34 @@
+create table If Not Exists Employee2
+(
+   Id int,
+   Name varchar(255),
+   Salary int,
+   ManagerId int,
+   PRIMARY KEY(Id)
+  );
+
+Truncate table Employee2;
+
+insert into Employee2 (Id, Name, Salary, ManagerId) values ('1', 'Joe', '70000', '3');
+
+insert into Employee2 (Id, Name, Salary, ManagerId) values ('2', 'Henry', '80000', '4');
+
+insert into Employee2 (Id, Name, Salary, ManagerId) values ('3', 'Sam', '60000', 'None');
+
+insert into Employee2 (Id, Name, Salary, ManagerId) values ('4', 'Max', '90000', 'None');
+
+select Name AS Employee
+from Employee2
+WHERE Salary > (
+    select Salary
+    from Employee2 AS e2
+    WHERE Employee2.ManagerId = e2.Id
+);
+
+
++----------+
+| Employee |
++----------+
+| Joe      |
++----------+
+1 row in set (0.00 sec)

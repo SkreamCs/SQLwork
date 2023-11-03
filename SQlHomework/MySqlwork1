@@ -1,0 +1,66 @@
+
+Create table Person (
+  PersonId int NOT NULL,
+  FirstName varchar(255),
+  LastName varchar(255),
+  PRIMARY KEY(PersonID));
+
+Create table Address (
+  AddressId int,
+  PersonId int,
+  City varchar(255),
+  State varchar(255),
+  PRIMARY KEY(AddressID));
+
+Truncate table Person;
+
+insert into Person (
+    PersonId,
+    LastName,
+    FirstName) values ('1', 'Wang', 'Allen');
+
+Truncate table Address;
+
+insert into Address (
+  AddressId,
+  PersonId,
+  City,
+  State) values ('1', '2', 'New York City', 'New York');
+
+ show tables;
++--------------------+
+| Tables_in_homework |
++--------------------+
+| Address            |
+| Person             |
++--------------------+
+2 rows in set (0.03 sec)
+
+select * from Person;
++----------+-----------+----------+
+| PersonId | FirstName | LastName |
++----------+-----------+----------+
+|        1 | Allen     | Wang     |
++----------+-----------+----------+
+1 row in set (0.01 sec)
+
+select * from Address;
++-----------+----------+---------------+----------+
+| AddressId | PersonId | City          | State    |
++-----------+----------+---------------+----------+
+|         1 |        2 | New York City | New York |
++-----------+----------+---------------+----------+
+1 row in set (0.01 sec)
+
+mysql> select FirstName, LastName, City, State
+       from Person
+       LEFT JOIN Address
+       ON Person.PersonId = Address.AddressId;
+
++-----------+----------+---------------+----------+
+| FirstName | LastName | City          | State    |
++-----------+----------+---------------+----------+
+| Allen     | Wang     | New York City | New York |
++-----------+----------+---------------+----------+
+1 row in set (0.04 sec)
+

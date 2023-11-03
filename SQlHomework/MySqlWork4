@@ -1,0 +1,24 @@
+create table If Not Exists Person2 (
+      Id int,
+      Email varchar(255),
+      PRIMARY KEY(Id)
+   );
+
+truncate table Person2;
+
+insert into Person2 (Id, Email) values ('1', 'a@b.com');
+
+insert into Person2 (Id, Email) values ('2', 'c@d.com');
+
+insert into Person2 (Id, Email) values ('3', 'a@b.com');
+
+mysql> select Email
+    -> from Person2
+    -> GROUP BY Email
+    -> HAVING COUNT(*) > 1;
++---------+
+| Email   |
++---------+
+| a@b.com |
++---------+
+1 row in set (0.02 sec)
